@@ -18,14 +18,14 @@ resource "aws_db_parameter_group" "mariadb-parameters" {
 
 
 resource "aws_db_instance" "mariadb" {
-  allocated_storage    = 100    # 100 GB of storage, gives us more IOPS than a lower number
+  allocated_storage    = 20    # 100 GB of storage, gives us more IOPS than a lower number
   engine               = "mariadb"
   engine_version       = "10.1.14"
-  instance_class       = "db.t2.small"    # use micro if you want to use the free tier
+  instance_class       = "db.t2.micro"    # use micro if you want to use the free tier
   identifier           = "mariadb"
   name                 = "mariadb"
   username             = "root"   # username
-  password             = "${var.RDS_PASSWORD}" # password
+  password             = "admin123" # password
   db_subnet_group_name = "${aws_db_subnet_group.mariadb-subnet.name}"
   parameter_group_name = "${aws_db_parameter_group.mariadb-parameters.name}"
   multi_az             = "false"     # set to true to have high availability: 2 instances synchronized with each other
